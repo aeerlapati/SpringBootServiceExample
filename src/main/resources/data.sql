@@ -1,0 +1,4 @@
+INSERT INTO NAMES VALUES (
+  100001,
+  'John'
+);
