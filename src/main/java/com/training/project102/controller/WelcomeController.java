@@ -82,7 +82,7 @@ public class WelcomeController {
 		}
 	}
 	
-	@GetMapping(path="/coal-mine")
+    @RequestMapping(value = "/coal-mine", method = RequestMethod.GET)
 	public String coalMine() {
 		return "Tweet";
 	}
