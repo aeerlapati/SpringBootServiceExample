@@ -37,11 +37,11 @@ public class WelcomeController {
 			return "<value>Hello " + request.getRequestURI().toString().substring(7) + "</value>";	
 			
 		}else if (headers.containsKey("accept-language")  && headers.get("accept-language").toString().trim().toLowerCase().contains("application/json")){
-			return "{ \"value\" : \"Hello World\" }";
+			return "{ \"value\" : \"Hello " +   request.getRequestURI().toString().substring(7)  +"\"}";
 			
 		}else {
 			
-			return "Please Pass  Header";
+			return "Please Pass the Header - accept-language";
 		}
 	}
 	

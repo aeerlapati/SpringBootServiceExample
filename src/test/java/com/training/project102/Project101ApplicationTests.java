@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
@@ -21,14 +22,34 @@ class Project101ApplicationTests {
 	private MockMvc	mockMvc;
 
 	@Test
-	void contextLoads() {
+	void sampleTest() {
 		assertEquals(5,5);
 	}
 	
 	@Test
-	public void validateHelloService() throws Exception {
+	public void validateHelloGetService() throws Exception {
 		this.mockMvc.perform(get("/hello/123456").header("accept-language", "application/xml")).andDo(print()).andExpect(status().isOk())
 		.andExpect(MockMvcResultMatchers.xpath("/value").string(is("Hello 123456")));
+	}
+	
+	@Test
+	public void validateHelloGetServiceheader() throws Exception {
+		this.mockMvc.perform(get("/hello/123456")).andDo(print()).andExpect(status().isOk())
+		.andExpect(MockMvcResultMatchers.content().string("Please Pass the Header - accept-language"));
+	}
+	
+	
+	@Test
+	public void validateHelloGetService_Json() throws Exception {
+		this.mockMvc.perform(get("/hello/123456").header("accept-language", "application/json")).andDo(print()).andExpect(status().isOk())
+		.andExpect(jsonPath("$.value").value("Hello 123456"));
+	}
+	
+	
+	@Test
+	public void validateHelloPutService_Json() throws Exception {
+		this.mockMvc.perform(get("/hello/123456").header("accept-language", "application/json")).andDo(print()).andExpect(status().isOk())
+		.andExpect(jsonPath("$.value").value("Hello 123456"));
 	}
 	
 	@Test
